@@ -4,6 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
 	"todo/todoList"
 
 	"github.com/spf13/cobra"
@@ -26,7 +27,12 @@ func addRun(cmd *cobra.Command, args []string) {
 		items = append(items, todoList.Item{Text: x})
 	}
 	// save the list
-	todoList.SaveItems("x", items)
+	err := todoList.SaveItems("/Users/bat20/.todos.json", items)
+
+	// if there was an error, tell us
+	if err != nil {
+		fmt.Errorf("%v", err)
+	}
 }
 
 func init() {
