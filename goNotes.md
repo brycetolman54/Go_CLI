@@ -1,5 +1,9 @@
 # Go Notes
 Here are all of my notes that relate to Go that I took while writing my command line application
+  1. [General Go Things](#general-go-things)
+  2. [Variables](#variables)
+  3. [Errors](errors)
+  4. [For loops](#for-loops)
 
 ## General Go things
 - Go is all about the 'main'
