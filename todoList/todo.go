@@ -1,4 +1,4 @@
-package todo
+package todoList
 
 type Item struct {
 	Text string
