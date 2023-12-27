@@ -6,7 +6,8 @@ package cmd
 import (
 	"fmt"
 
-	"github.com/brycetolman54/Go_CLI/todoList"
+	"todo/todoList"
+
 	"github.com/spf13/cobra"
 )
 
@@ -25,7 +26,7 @@ func addRun(cmd *cobra.Command, args []string) {
 	for _, x := range args {
 		items = append(items, todoList.Item{Text: x})
 	}
-	fmt.Println(items)
+	fmt.Printf("%#v\n", items)
 }
 
 func init() {
