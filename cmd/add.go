@@ -4,8 +4,6 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
-
 	"todo/todoList"
 
 	"github.com/spf13/cobra"
@@ -24,9 +22,11 @@ func addRun(cmd *cobra.Command, args []string) {
 	items := []todoList.Item{}
 	// add the items to the list
 	for _, x := range args {
+		// Text is the variable name in the struct, you "construct" the Item with the x value by the :
 		items = append(items, todoList.Item{Text: x})
 	}
-	fmt.Printf("%#v\n", items)
+	// save the list
+	todoList.SaveItems("x", items)
 }
 
 func init() {

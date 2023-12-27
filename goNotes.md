@@ -5,6 +5,8 @@ Here are all of my notes that relate to Go that I took while writing my command 
   3. [Errors](#errors)
   4. [For loops](#for-loops)
   5. [Structs](#structs)
+  6. [Functions](#functions)
+  7. [If Statements](#if-statements)
 
 ## General Go things
 - Go is all about the 'main'
@@ -23,6 +25,8 @@ Here are all of my notes that relate to Go that I took while writing my command 
 ## Errors
 - These are just values, not exceptions
 - Always do error handling
+- You will often use `if err != nil {return err}`
+  - `nil` is like null, obviously
 
 
 ## For loops
@@ -34,3 +38,10 @@ Here are all of my notes that relate to Go that I took while writing my command 
 ## Structs
 - These are your own data type that you can create as you desire
 - There are no constructors
+
+## Functions
+- Functions are decalred with `func`
+- You do not have to give a return type to the function
+
+## If statements
+- You do them `if condition {}`, without any parentheses
