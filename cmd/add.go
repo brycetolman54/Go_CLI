@@ -15,23 +15,28 @@ var addCmd = &cobra.Command{
 	Use:   "add",
 	Short: "Add a new task to the list",
 	Long:  `Add will create a new item on the todo list`,
-	Run:   addRun,
+	Run:   runAdd,
 }
 
-func addRun(cmd *cobra.Command, args []string) {
-	// declare the list of items
-	items := []todoList.Item{}
+func runAdd(cmd *cobra.Command, args []string) {
+	// declare the list of items (new or existing)
+	items, err := todoList.ReadItems("C:/Users/bat20/.todos.json")
+	// if there was an error, tell us
+	if err != nil {
+		fmt.Println(string("\u001b[38;5;160m"), err, string("\u001b[38;5;0m"))
+	}
+
 	// add the items to the list
 	for _, x := range args {
 		// Text is the variable name in the struct, you "construct" the Item with the x value by the :
 		items = append(items, todoList.Item{Text: x})
 	}
 	// save the list
-	err := todoList.SaveItems("/Users/bat20/.todos.json", items)
+	err = todoList.SaveItems("C:/Users/bat20/.todos.json", items)
 
 	// if there was an error, tell us
 	if err != nil {
-		fmt.Errorf("%v", err)
+		fmt.Println(string("\u001b[38;5;160m"), err, string("\u001b[38;5;0m"))
 	}
 }
 

@@ -39,9 +39,11 @@ Here are all of my notes that relate to Go that I took while writing my command 
 
 
 ## Variables
-- `:=` is used to declare and assign a variable in one go (you don't have to give it a type)
+- `:=` is used to declare and assign a variable in one go (you don't have to give it a type this way)
 - It sure seems like the declaration of variables is backwards (name Type)
 - Arrays are declared as []array
+- If you don't use `:=`, you have to give the variable a type (or just var)
+- You can do pointers with & (that makes the pointer) and dereference with *
 
 
 
@@ -50,7 +52,7 @@ Here are all of my notes that relate to Go that I took while writing my command 
 - Always do error handling
 - You will often use `if err != nil {return err}`
   - `nil` is like null, obviously
-
+- You usually try to do this by giving a function an error return type in addition to whatever other types you need
 
 
 
@@ -72,12 +74,22 @@ Here are all of my notes that relate to Go that I took while writing my command 
 - Functions are decalred with `func`
 - You do not have to give a return type to the function
 - Functions tend to be capitalized 
+- You can give a return type, it just goes at the end of the declaration: `func Name(name Type) returnType {}`
+- Functions can have multiple returns, so you can also assign multiple variables from one function
 
 
 
 ## If statements
 - You do them `if condition {}`, without any parentheses
-
+- You can put a declaration of a variable in the if statement if you are really only going to use it right then:
+```go
+if err := json.Unmarshal(b, &items); err != nil {
+            return []Item{}, err
+                
+}
+// this declares the err for just that statement
+// notice how it gives the function a pointer, since you don't get that info from running the function when it is in the if statement
+```
 
 
 
