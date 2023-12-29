@@ -7,6 +7,7 @@ Here are all of my notes that relate to Go that I took while writing my command 
   5. [Structs](#structs)
   6. [Functions](#functions)
   7. [If Statements](#if-statements)
+  8. [Logging](#logging)
 
 
 
@@ -14,6 +15,7 @@ Here are all of my notes that relate to Go that I took while writing my command 
 ## General Go things
     1. [File Setup](#file-setup)
     2. [Imports](#imports)
+    3. [OS Files](#os-files)
 
 ### File Setup
 - Go is all about the 'main'
@@ -36,6 +38,10 @@ Here are all of my notes that relate to Go that I took while writing my command 
     - perm is the permissions: 0 (for octal), ### for user, group, and other permissions
 - ___"github.com/spf13/cobra"___ allows us to use cobra's commands to set up the application
 
+### OS Files
+- You can use `os.Create()` to create a file
+- You can use `os.Stat()` to check the status of a file
+- You can use `os.IsNotExist()` to check if something (a variable) exists or not
 
 
 ## Variables
@@ -91,7 +97,10 @@ if err := json.Unmarshal(b, &items); err != nil {
 // notice how it gives the function a pointer, since you don't get that info from running the function when it is in the if statement
 ```
 
-
+## Logging
+- You can set the log file with `log.SetOutput(io.Writer)`
+- You can print to the log with `log.Println` or `log.Printf`
+- You can use `log.Fatal("error message")` to print to the log and then to terminate the program
 
 
 

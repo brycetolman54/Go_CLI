@@ -4,7 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
-	"fmt"
+	"log"
 	"todo/todoList"
 
 	"github.com/spf13/cobra"
@@ -23,7 +23,7 @@ func runAdd(cmd *cobra.Command, args []string) {
 	items, err := todoList.ReadItems("C:/Users/bat20/.todos.json")
 	// if there was an error, tell us
 	if err != nil {
-		fmt.Println(string("\u001b[38;5;160m"), err, string("\u001b[38;5;0m"))
+		log.Printf("%v", err)
 	}
 
 	// add the items to the list
@@ -36,7 +36,7 @@ func runAdd(cmd *cobra.Command, args []string) {
 
 	// if there was an error, tell us
 	if err != nil {
-		fmt.Println(string("\u001b[38;5;160m"), err, string("\u001b[38;5;0m"))
+		log.Printf("%v", err)
 	}
 }
 

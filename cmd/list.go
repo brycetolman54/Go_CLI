@@ -1,11 +1,12 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
 	"fmt"
+	"log"
+	"todo/todoList"
 
 	"github.com/spf13/cobra"
 )
@@ -13,16 +14,22 @@ import (
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Shows the list of your todos",
+	Long:  "List will show the list of your todos. You can filter the list with different options",
+	Run:   runList,
+}
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("list called")
-	},
+func runList(cmd *cobra.Command, args []string) {
+	// grab the items from the file
+	items, err := todoList.ReadItems("C:/Users/bat20/.todos.json")
+
+	// if there is an error, put it in the log
+	if err != nil {
+		log.Printf("%v", err)
+	}
+
+	// print out the item list
+	fmt.Println(items)
 }
 
 func init() {

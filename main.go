@@ -1,6 +1,5 @@
 /*
 Copyright © 2023 Bryce Tolman
-
 */
 package main
 
