@@ -7,8 +7,12 @@ import (
 	"log"
 	"os"
 
+	"github.com/mitchellh/go-homedir"
 	"github.com/spf13/cobra"
 )
+
+var dataFile string
+var errorFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
@@ -30,6 +34,32 @@ func fileExists(filename string) bool {
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
+
+	// Execute order 66
+	err := rootCmd.Execute()
+	if err != nil {
+		os.Exit(1)
+	}
+}
+
+func init() {
+	// Here you will define your flags and configuration settings.
+	// Cobra supports persistent flags, which, if defined here,
+	// will be global for your application.
+
+	// find the home directory of the user
+	home, err := homedir.Dir()
+	if err != nil {
+		log.Println("Unable to detect home directory. Please set data file using --datafile and error file using --errorfile.")
+	}
+
+	// set the dataFile
+	rootCmd.PersistentFlags().StringVar(&dataFile, "datafile", home+string(os.PathSeparator)+".todos.json", "data file to store todos")
+
+	// set the errorFile
+	rootCmd.PersistentFlags().StringVar(&errorFile, "errorfile", home+string(os.PathSeparator)+".todos_errors.log", "file to store the errors log from running the program")
+
+	//------------- Create Files ------------------------------------
 
 	// make the file names
 	filename1 := "C:/Users/bat20/.todos.json"
@@ -60,18 +90,7 @@ func Execute() {
 	defer file.Close()
 	// set the log output as that file
 	log.SetOutput(file)
-
-	// Execute order 66
-	err = rootCmd.Execute()
-	if err != nil {
-		os.Exit(1)
-	}
-}
-
-func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
+	// -----------------------------------------------------------------
 
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.todo.yaml)")
 

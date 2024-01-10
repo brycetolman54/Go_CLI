@@ -42,7 +42,9 @@ Here are all of my notes that relate to Go that I took while writing my command 
 - You can use `os.Create()` to create a file
 - You can use `os.Stat()` to check the status of a file
 - You can use `os.IsNotExist()` to check if something (a variable) exists or not
-
+- You can use `os.OpenFile()` to open the file for use
+  - The parameters we need for this are the path to the file, the open type, and the permissions: 
+    - The open type can be `os.O_RDWR, os.O_CREATE, os.O_APPEND` or all of them as `os.O_RDWR|os.O_CREATE|os.O_APPEND`
 
 ## Variables
 - `:=` is used to declare and assign a variable in one go (you don't have to give it a type this way)

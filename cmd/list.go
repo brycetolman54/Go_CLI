@@ -21,7 +21,7 @@ var listCmd = &cobra.Command{
 
 func runList(cmd *cobra.Command, args []string) {
 	// grab the items from the file
-	items, err := todoList.ReadItems("C:/Users/bat20/.todos.json")
+	items, err := todoList.ReadItems(dataFile)
 
 	// if there is an error, put it in the log
 	if err != nil {

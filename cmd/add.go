@@ -20,7 +20,7 @@ var addCmd = &cobra.Command{
 
 func runAdd(cmd *cobra.Command, args []string) {
 	// declare the list of items (new or existing)
-	items, err := todoList.ReadItems("C:/Users/bat20/.todos.json")
+	items, err := todoList.ReadItems(dataFile)
 	// if there was an error, tell us
 	if err != nil {
 		log.Printf("%v", err)
@@ -32,7 +32,7 @@ func runAdd(cmd *cobra.Command, args []string) {
 		items = append(items, todoList.Item{Text: x})
 	}
 	// save the list
-	err = todoList.SaveItems("C:/Users/bat20/.todos.json", items)
+	err = todoList.SaveItems(dataFile, items)
 
 	// if there was an error, tell us
 	if err != nil {
