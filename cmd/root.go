@@ -57,9 +57,6 @@ func Execute() {
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
 
 	// find the home directory of the user
 	home, err := homedir.Dir()
@@ -91,5 +88,4 @@ func init() {
 
 	// -----------------------------------------------------------------
 
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.todo.yaml)")
 }
