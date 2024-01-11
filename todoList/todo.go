@@ -13,8 +13,11 @@ type Item struct {
 	// priority of the todo task
 	Priority int
 
-	// add the position in the list
+	// position in the list for sorting purposes
 	Position int
+
+	// status of the item
+	Done bool
 }
 
 func (i *Item) SetPriority(pri int) {

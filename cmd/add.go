@@ -4,6 +4,7 @@ Copyright © 2023 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"todo/todoList"
 
@@ -22,6 +23,12 @@ var addCmd = &cobra.Command{
 }
 
 func runAdd(cmd *cobra.Command, args []string) {
+	// make sure there are args
+	if len(args) == 0 {
+		fmt.Println("you have to include a task to add to the list")
+		return
+	}
+
 	// declare the list of items (new or existing)
 	items, err := todoList.ReadItems(dataFile)
 	// if there was an error, tell us

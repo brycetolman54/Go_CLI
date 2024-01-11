@@ -36,8 +36,20 @@ func fileExists(filename string) bool {
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 
+	// get the log file open
+	file, err := os.OpenFile(errorFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	// if there is an error
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// keep the file from closing for a second
+	defer file.Close()
+	// set the log output as that file
+	log.SetOutput(file)
+
 	// Execute order 66
-	err := rootCmd.Execute()
+	err = rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
 	}
@@ -76,17 +88,6 @@ func init() {
 		}
 	}
 
-	// get the log file open
-	file, err := os.OpenFile(errorFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	// if there is an error
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// keep the file from closing for a second
-	defer file.Close()
-	// set the log output as that file
-	log.SetOutput(file)
 	// -----------------------------------------------------------------
 
 	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.todo.yaml)")
