@@ -72,7 +72,7 @@ func runList(cmd *cobra.Command, args []string) {
 		} else {
 			extra = ""
 		}
-		fmt.Fprintln(w, i.Label()+"\t\t"+color+"("+strconv.Itoa(pt)+")"+"\t\t"+extra+i.Text+restText)
+		fmt.Fprintln(w, i.Label()+"\t"+i.PrettyDone()+"\t"+color+"("+strconv.Itoa(pt)+")"+"\t\t"+extra+i.Text+restText)
 	}
 
 	// flsuh out the writer buffer

@@ -42,7 +42,7 @@ func runDone(cmd *cobra.Command, args []string) {
 	}
 
 	// make sure the item is on the list
-	if i > 0 && i < len(items) {
+	if i > 0 && i <= len(items) {
 		// mark it done
 		items[i-1].Done = true
 		// tell them you marked it done
