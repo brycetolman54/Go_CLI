@@ -31,8 +31,12 @@ func runAdd(cmd *cobra.Command, args []string) {
 
 	// add the items to the list
 	for _, x := range args {
+		// get the item
+		item := todoList.Item{Text: x}
+		// set the priority
+		item.SetPriority(priority)
 		// Text is the variable name in the struct, you "construct" the Item with the x value by the :
-		items = append(items, todoList.Item{Text: x})
+		items = append(items, item)
 	}
 	// save the list
 	err = todoList.SaveItems(dataFile, items)
@@ -46,7 +50,7 @@ func runAdd(cmd *cobra.Command, args []string) {
 func init() {
 	rootCmd.AddCommand(addCmd)
 
-	addCmd.Flags().IntVarP(&priority, "priority", "p", 2, "Priority: 1, 2, 3")
+	addCmd.Flags().IntVarP(&priority, "priority", "p", 2, "Priority: 1, 2, 3, 4")
 
 	// Here you will define your flags and configuration settings.
 
