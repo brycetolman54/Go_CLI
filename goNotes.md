@@ -47,10 +47,10 @@ Here are all of my notes that relate to Go that I took while writing my command 
     - The open type can be `os.O_RDWR, os.O_CREATE, os.O_APPEND` or all of them as `os.O_RDWR|os.O_CREATE|os.O_APPEND`
 
 ## Variables
-- `:=` is used to declare and assign a variable in one go (you don't have to give it a type this way)
+- `:=` is used to declare and assign a variable in one go (you don't have to give it a type this way) but this only works with functions
 - It sure seems like the declaration of variables is backwards (name Type)
 - Arrays are declared as []array
-- If you don't use `:=`, you have to give the variable a type (or just var)
+- If you don't use `:=`, you have to give the variable a type as so: `var name Type = value`
 - You can do pointers with & (that makes the pointer) and dereference with *
 
 

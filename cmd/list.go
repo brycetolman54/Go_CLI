@@ -6,10 +6,22 @@ package cmd
 import (
 	"fmt"
 	"log"
+	"os"
+	"strconv"
+	"text/tabwriter"
 	"todo/todoList"
 
 	"github.com/spf13/cobra"
 )
+
+// strings for coloring
+var esc string = "\u001b"
+var setText string = esc + "[38;5;"
+var setBG string = esc + "[48;5;"
+var redText string = setText + "160m"
+var yellowText string = setText + "226m"
+var greenText string = setText + "46m"
+var blueText string = setText + "12m"
 
 // listCmd represents the list command
 var listCmd = &cobra.Command{
@@ -20,6 +32,9 @@ var listCmd = &cobra.Command{
 }
 
 func runList(cmd *cobra.Command, args []string) {
+	// set up the writer
+	w := tabwriter.NewWriter(os.Stdout, 3, 0, 1, ' ', 0)
+
 	// grab the items from the file
 	items, err := todoList.ReadItems(dataFile)
 
@@ -28,8 +43,35 @@ func runList(cmd *cobra.Command, args []string) {
 		log.Printf("%v", err)
 	}
 
-	// print out the item list
-	fmt.Println(items)
+	// add the items to the list and send it
+	for _, i := range items {
+		var color string
+		var extra string
+		// get the priority
+		pt := i.Priority
+		// set the text color
+		switch pt {
+		case 1:
+			color = redText
+		case 2:
+			color = yellowText
+		case 3:
+			color = greenText
+		case 4:
+			color = blueText
+		default:
+			color = ""
+		}
+		if pt == 1 || pt == 2 {
+			extra = " "
+		} else {
+			extra = ""
+		}
+		fmt.Fprintln(w, "\t"+color+"("+strconv.Itoa(pt)+")"+"\t\t"+extra+i.Text)
+	}
+
+	// flsuh out the writer buffer
+	w.Flush()
 }
 
 func init() {
