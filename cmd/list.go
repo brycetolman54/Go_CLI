@@ -25,6 +25,9 @@ var greenText string = setText + "46m"
 var blueText string = setText + "12m"
 var restText string = setText + "15m"
 
+// variables for flags
+var doneOpt bool
+
 // listCmd represents the list command
 var listCmd = &cobra.Command{
 	Use:   "list",
@@ -72,7 +75,9 @@ func runList(cmd *cobra.Command, args []string) {
 		} else {
 			extra = ""
 		}
-		fmt.Fprintln(w, i.Label()+"\t"+i.PrettyDone()+"\t"+color+"("+strconv.Itoa(pt)+")"+"\t\t"+extra+i.Text+restText)
+		if i.Done == doneOpt {
+			fmt.Fprintln(w, i.Label()+"\t"+i.PrettyDone()+"\t"+color+"("+strconv.Itoa(pt)+")"+"\t\t"+extra+i.Text+restText)
+		}
 	}
 
 	// flsuh out the writer buffer
@@ -81,6 +86,8 @@ func runList(cmd *cobra.Command, args []string) {
 
 func init() {
 	rootCmd.AddCommand(listCmd)
+
+	listCmd.Flags().BoolVarP(&doneOpt, "done", "d", false, "Show 'Done' Todos on the list")
 
 	// Here you will define your flags and configuration settings.
 
