@@ -10,6 +10,9 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// priority value for adding a task
+var priority int
+
 // addCmd represents the add command
 var addCmd = &cobra.Command{
 	Use:   "add",
@@ -42,6 +45,8 @@ func runAdd(cmd *cobra.Command, args []string) {
 
 func init() {
 	rootCmd.AddCommand(addCmd)
+
+	addCmd.Flags().IntVarP(&priority, "priority", "p", 2, "Priority: 1, 2, 3")
 
 	// Here you will define your flags and configuration settings.
 

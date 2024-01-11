@@ -11,6 +11,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+// file names for later
 var dataFile string
 var errorFile string
 
@@ -61,26 +62,22 @@ func init() {
 
 	//------------- Create Files ------------------------------------
 
-	// make the file names
-	filename1 := "C:/Users/bat20/.todos.json"
-	filename2 := "C:/Users/bat20/.todos_errors.log"
-
 	// make the files if they don't exist
-	if !fileExists(filename1) {
-		_, err := os.Create(filename1)
+	if !fileExists(dataFile) {
+		_, err := os.Create(dataFile)
 		if err != nil {
 			log.Fatal(err)
 		}
 	}
-	if !fileExists(filename2) {
-		_, err := os.Create(filename2)
+	if !fileExists(errorFile) {
+		_, err := os.Create(errorFile)
 		if err != nil {
 			log.Fatal(err)
 		}
 	}
 
 	// get the log file open
-	file, err := os.OpenFile(filename2, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+	file, err := os.OpenFile(errorFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	// if there is an error
 	if err != nil {
 		log.Fatal(err)
@@ -96,5 +93,5 @@ func init() {
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
-	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	// rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
