@@ -27,6 +27,7 @@ var restText string = setText + "15m"
 
 // variables for flags
 var doneOpt bool
+var allOpt bool
 
 // listCmd represents the list command
 var listCmd = &cobra.Command{
@@ -75,7 +76,7 @@ func runList(cmd *cobra.Command, args []string) {
 		} else {
 			extra = ""
 		}
-		if i.Done == doneOpt {
+		if allOpt || i.Done == doneOpt {
 			fmt.Fprintln(w, i.Label()+"\t"+i.PrettyDone()+"\t"+color+"("+strconv.Itoa(pt)+")"+"\t\t"+extra+i.Text+restText)
 		}
 	}
@@ -87,7 +88,9 @@ func runList(cmd *cobra.Command, args []string) {
 func init() {
 	rootCmd.AddCommand(listCmd)
 
-	listCmd.Flags().BoolVarP(&doneOpt, "done", "d", false, "Show 'Done' Todos on the list")
+	listCmd.Flags().BoolVarP(&doneOpt, "done", "d", false, "Show 'Done' items on the todo list")
+
+	listCmd.Flags().BoolVarP(&allOpt, "all", "a", false, "Show all items on the todo list (both done and undone)")
 
 	// Here you will define your flags and configuration settings.
 
