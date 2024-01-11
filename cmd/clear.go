@@ -1,11 +1,10 @@
 /*
 Copyright © 2024 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
-	"fmt"
+	"todo/todoList"
 
 	"github.com/spf13/cobra"
 )
@@ -13,16 +12,13 @@ import (
 // clearCmd represents the clear command
 var clearCmd = &cobra.Command{
 	Use:   "clear",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Short: "Clear all items",
+	Long:  "Clear all of the tasks off of the todo list",
+	Run:   runClear,
+}
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
-	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("clear called")
-	},
+func runClear(cmd *cobra.Command, args []string) {
+	todoList.SaveItems(dataFile, nil)
 }
 
 func init() {
