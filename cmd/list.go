@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strconv"
 	"text/tabwriter"
 	"todo/todoList"
@@ -22,6 +23,7 @@ var redText string = setText + "160m"
 var yellowText string = setText + "226m"
 var greenText string = setText + "46m"
 var blueText string = setText + "12m"
+var restText string = setText + "15m"
 
 // listCmd represents the list command
 var listCmd = &cobra.Command{
@@ -37,6 +39,9 @@ func runList(cmd *cobra.Command, args []string) {
 
 	// grab the items from the file
 	items, err := todoList.ReadItems(dataFile)
+
+	// sort the items first by priority and then by position
+	sort.Sort(todoList.ByPri(items))
 
 	// if there is an error, put it in the log
 	if err != nil {
@@ -67,7 +72,7 @@ func runList(cmd *cobra.Command, args []string) {
 		} else {
 			extra = ""
 		}
-		fmt.Fprintln(w, "\t"+color+"("+strconv.Itoa(pt)+")"+"\t\t"+extra+i.Text)
+		fmt.Fprintln(w, i.Label()+"\t\t"+color+"("+strconv.Itoa(pt)+")"+"\t\t"+extra+i.Text+restText)
 	}
 
 	// flsuh out the writer buffer
