@@ -1,5 +1,16 @@
 # Todo CLI Application
 
+Todo:
+- [ ] edit should be its own command with flags to edit whatever thing
+- [ ] you should persist a list of the categories so that you can list them
+- [ ] you should be able to list by category
+- [ ] figure out how to set due dates and update priorty based on proximity to a due date whenever you list things
+- [ ] make it an option to list with the category
+- [ ] you have to make it so the sort also looks at the priority
+- [ ] you could have an option to list things with the categories highlighted by background by category (or you can add a precedent for category and sort by that as well)
+- [ ] finish the readme
+- all of this is not high priority
+
 ___TODO___ is the next gen command line application that allows you to manage your todo-list in a quick and simple way
 
 ___TODO___ allows you to __add__, __list__, __prioritize__, set __due dates__, and __check off__ the many items that you are concerned with in your life
